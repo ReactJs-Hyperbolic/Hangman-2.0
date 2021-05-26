@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Pass in the selectedWord to determine how many spaces to show
+// along with the correctLetters to compare and deduce what to render
 const Word = ({ selectedWord, correctLetters }) => {
   return (
     <div className='word' id='word'>

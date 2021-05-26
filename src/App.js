@@ -14,14 +14,16 @@ function App() {
   // Create state for our dynamic variables
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
-  const [incorrectLetters, setIncorrect] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
 
   return (
     <>
       <Header />
-      <Figure />
-      <WrongLetters />
-      <Word />
+      <div className='game-container'>
+        <Figure />
+        <WrongLetters />
+        <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+      </div>
     </>
   );
 }
