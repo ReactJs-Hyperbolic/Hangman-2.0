@@ -1,7 +1,17 @@
 import React from 'react';
 
-const Word = () => {
-  return <div class='word' id='word'></div>;
+const Word = ({ selectedWord, correctLetters }) => {
+  return (
+    <div className='word' id='word'>
+      {selectedWord.split('').map((letter, index) => {
+        return (
+          <span className='letter' key={index}>
+            {correctLetters.includes(letter) ? letter : '_'}
+          </span>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Word;
