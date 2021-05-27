@@ -17,21 +17,21 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
 
   useEffect(() => {
-    const handleKeydown = (event) => {
+    const handleKeydown = event => {
       const { key, keyCode } = event;
       console.log(event);
-      if (playable.keyCode >= 65 && keyCode <= 90) {
+      if (playable && keyCode >= 65 && keyCode <= 90) {
         const letter = key.toLowerCase();
 
         if (selectedWord.includes(letter)) {
           if (!correctLetters.includes(letter)) {
-            setCorrectLetters((currentLetters) => [...currentLetters, letter]);
+            setCorrectLetters(currentLetters => [...currentLetters, letter]);
           } else {
             // showNotification();
           }
         } else {
           if (!wrongLetters.includes(letter)) {
-            setWrongLetters((wrongLetters) => [...wrongLetters, letter]);
+            setWrongLetters(wrongLetters => [...wrongLetters, letter]);
           } else {
             // showNotification();
           }
