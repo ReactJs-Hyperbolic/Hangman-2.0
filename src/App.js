@@ -8,6 +8,7 @@ import Notification from './Components/Notification';
 import Popup from './Components/Popup';
 
 import { showNotification as show } from './helpers/helpers';
+import { select } from 'async';
 
 const words = ['application', 'programming', 'interface', 'wizard'];
 
@@ -65,7 +66,12 @@ function App() {
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
-      <Popup />
+      <Popup
+        correctLetters={correctLetters}
+        wrongLetters={wrongLetters}
+        selectedWord={selectedWord}
+        setPlayable={setPlayable}
+      />
       <Notification showNotification={showNotification} />
     </>
   );
