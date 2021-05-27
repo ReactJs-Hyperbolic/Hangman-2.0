@@ -4,6 +4,10 @@ import Header from './Components/Header';
 import Figure from './Components/Figure';
 import WrongLetters from './Components/WrongLetters';
 import Word from './Components/Word';
+import Notification from './Components/Notification';
+import Popup from './Components/Popup';
+
+import { showNotification as show } from './helpers/helpers';
 
 const words = ['application', 'programming', 'interface', 'wizard'];
 
@@ -15,6 +19,7 @@ function App() {
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const handleKeydown = event => {
@@ -28,12 +33,15 @@ function App() {
             setCorrectLetters(currentLetters => [...currentLetters, letter]);
           } else {
             // showNotification();
+            // Use custom helper function to setShowNotification to true then false
+            show(setShowNotification);
           }
         } else {
           if (!wrongLetters.includes(letter)) {
             setWrongLetters(wrongLetters => [...wrongLetters, letter]);
           } else {
             // showNotification();
+            show(setShowNotification);
           }
         }
       }
@@ -44,7 +52,7 @@ function App() {
 
     // Clean-up event listeners which are rendered each time
     return () => {
-      console.log('CLEANED');
+      console.log('Cleaned event listener');
       window.removeEventListener('keydown', handleKeydown);
     };
   }, [correctLetters, wrongLetters, playable]);
@@ -53,10 +61,12 @@ function App() {
     <>
       <Header />
       <div className='game-container'>
-        <Figure />
+        <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
+      <Popup />
+      <Notification showNotification={showNotification} />
     </>
   );
 }
